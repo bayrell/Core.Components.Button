@@ -19,6 +19,9 @@
 namespace Core.Components.Button;
 
 use Runtime.RuntimeUtils;
+use Core.UI.Annotations.BindValue;
+use Core.UI.Annotations.Event;
+use Core.UI.Events.MouseEvent.MouseClickEvent;
 use Core.UI.Render.CoreView;
 use Core.UI.Render.RenderHelper;
 use Core.UI.Interfaces.ComponentInterface;
@@ -27,13 +30,6 @@ use Core.Components.Button.ButtonModel;
 
 class Button extends CoreView
 {
-
-	/**
-	 * Returns module name
-	 */
-	lambda string moduleName() => "Core.Components.Button";
-	
-	
 	
 	/**
 	 * Component css
@@ -53,7 +49,16 @@ class Button extends CoreView
 	 * Component render
 	 */
 	lambda Collection<UIStruct> render(ButtonModel model, UIStruct ui) =>
-		<button @class='button' @control='button' @tag={ ui.props.get("@tag", "") }>{ ui.children }</button>
+		<button
+			@class='button'
+			@tag={ ui.props.get("@tag", "") }
+			@annotations=[
+				new Event{
+					"event": classof MouseClickEvent, 
+					"method_name": "onButtonClick"
+				}
+			]
+		>{ ui.children }</button>
 	;
 	
 	

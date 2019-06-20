@@ -31,10 +31,12 @@ class ButtonManager extends CoreManager
 	
 	public ButtonModel model;
 	
-	
-	@SignalOut{
-		"event": classof MouseClickEvent, 
+	/**
+	 * Button click
+	 */
+	public void onButtonClick(UIEvent<MouseClickEvent> e)
+	{
+		this.signalOut(e.event);
 	}
-	public assignable UIController button = new UIController();
 	
 }
