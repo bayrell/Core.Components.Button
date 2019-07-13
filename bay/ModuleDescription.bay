@@ -18,14 +18,11 @@
 
 namespace Core.Components.Button;
 
-use Runtime.Exceptions.RuntimeException;
-use Runtime.Interfaces.ComponentInterface;
-use Runtime.Interfaces.ContextInterface;
+use Runtime.Interfaces.AssetsInterface;
 use Runtime.Interfaces.ModuleDescriptionInterface;
-use Core.UI.Render.RenderContainer;
 
 
-class ModuleDescription implements ModuleDescriptionInterface, ComponentInterface
+class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 {
 	
 	/**
@@ -61,10 +58,9 @@ class ModuleDescription implements ModuleDescriptionInterface, ComponentInterfac
 	 */
 	lambda Collection<string> getModuleFiles() => 
 	[
-		"Core.Components.Button.Button",
-		"Core.Components.Button.ButtonManager",
-		"Core.Components.Button.ButtonModel",
-		"Core.Components.Button.ModuleDescription",
+		"Core.Components.Button/Button",
+		"Core.Components.Button/ButtonModel",
+		"Core.Components.Button/ModuleDescription",
 	];
 	
 	
@@ -73,27 +69,6 @@ class ModuleDescription implements ModuleDescriptionInterface, ComponentInterfac
 	 * Returns enities
 	 */
 	lambda Collection<Dict> entities() => null;
-	
-	
-	
-	/**
-	 * Returns view name
-	 */
-	lambda string componentViewName()  => "Core.Components.Button.Button";
-	
-	
-	
-	/**
-	 * Returns manager name
-	 */
-	lambda string componentManagerName() => "Core.Components.Button.ButtonManager";
-	
-	
-	
-	/**
-	 * Returns model name
-	 */
-	lambda string componentModelName()  => "Core.Components.Button.ButtonModel";
 	
 	
 	

@@ -18,18 +18,27 @@
  
 namespace Core.Components.Button;
 
-use Runtime.RuntimeUtils;
-use Core.UI.Annotations.BindValue;
-use Core.UI.Annotations.Event;
-use Core.UI.Events.MouseEvent.MouseClickEvent;
-use Core.UI.Render.CoreView;
-use Core.UI.Render.RenderHelper;
-use Core.UI.Interfaces.ComponentInterface;
+use Core.Annotations.BindValue;
+use Core.Annotations.Event;
 use Core.Components.Button.ButtonModel;
+use Core.UI.Events.MouseEvent.MouseClickEvent;
+use Core.UI.Interfaces.ComponentInterface;
+use Core.UI.Component;
 
 
-class Button extends CoreView
+class Button extends Component
 {
+	
+	public ButtonModel model;
+	
+	
+	
+	/**
+	 * Returns model name
+	 */
+	lambda string modelName() => classof ButtonModel;
+	
+	
 	
 	/**
 	 * Component css
@@ -62,5 +71,17 @@ class Button extends CoreView
 	;
 	
 	
+	
+	
+	/* ---------------------------------- Events ----------------------------------- */
+	
+	
+	/**
+	 * Button click
+	 */
+	public void onButtonClick(UIEvent<MouseClickEvent> e)
+	{
+		this.signalOut(e.event);
+	}
 	
 }
