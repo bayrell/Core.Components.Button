@@ -24,6 +24,7 @@ use Core.Components.Button.ButtonModel;
 use Core.UI.Events.MouseEvent.MouseClickEvent;
 use Core.UI.Interfaces.ComponentInterface;
 use Core.UI.Component;
+use Core.UI.PocketModel;
 
 
 class Button extends Component
@@ -57,7 +58,7 @@ class Button extends Component
 	/**
 	 * Component render
 	 */
-	lambda Collection<UIStruct> render(ButtonModel model, UIStruct ui) =>
+	lambda Collection<UIStruct> render(ButtonModel model, UIStruct ui, PocketModel pocket) =>
 		<button
 			@class='button'
 			@tag={ ui.props.get("@tag", "") }
