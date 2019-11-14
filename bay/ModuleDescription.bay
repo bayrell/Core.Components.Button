@@ -1,5 +1,5 @@
 /*!
- *  Bayrell Core Library
+ *  Bayrell Runtime Library
  *
  *  (c) Copyright 2018-2019 "Ildar Bikmamatov" <support@bayrell.org>
  *
@@ -16,7 +16,7 @@
  *  limitations under the License.
  */
 
-namespace Core.Components.Button;
+namespace Runtime.Web.Button;
 
 use Runtime.Interfaces.AssetsInterface;
 use Runtime.Interfaces.ModuleDescriptionInterface;
@@ -24,12 +24,16 @@ use Runtime.Interfaces.ModuleDescriptionInterface;
 
 class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 {
+
 	
 	/**
 	 * Returns module name
 	 * @return string
 	 */
-	lambda string getModuleName() => "Core.Components.Button";
+	public static string getModuleName()
+	{
+		return "Runtime.Web.Button";
+	}
 	
 	
 	
@@ -37,7 +41,10 @@ class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 	 * Returns module name
 	 * @return string
 	 */
-	lambda string getModuleVersion() => "0.1.2";
+	public static string getModuleVersion()
+	{
+		return "0.1.2";
+	}
 	
 	
 	
@@ -47,7 +54,7 @@ class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 	 */
 	lambda Map<string> requiredModules() => 
 	{
-		'Core.UI': '>=0.3',
+		"Runtime.Web.UI": ">=0.3",
 	};
 	
 	
@@ -56,11 +63,10 @@ class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 	 * Returns module files load order
 	 * @return Collection<string>
 	 */
-	lambda Collection<string> getModuleFiles() => 
+	lambda Collection<string> assets() => 
 	[
-		"Core.Components.Button/Button",
-		"Core.Components.Button/ButtonModel",
-		"Core.Components.Button/ModuleDescription",
+		"Runtime.Web.Button/Button",
+		"Runtime.Web.Button/ModuleDescription",
 	];
 	
 	
@@ -76,30 +82,6 @@ class ModuleDescription implements ModuleDescriptionInterface, AssetsInterface
 	 * Returns sync loaded files
 	 */		
 	lambda Collection<string> resources() => null;
-	
-	
-	
-	/**
-	 * Called then module registed in context
-	 * @param ContextInterface context
-	 */
-	public static void onRegister(ContextInterface context){}
-	
-	
-	
-	/**
-	 * Called then context read config
-	 * @param Map<mixed> config
-	 */
-	public static void onReadConfig(ContextInterface context, Map<mixed> config){}
-	
-	
-	
-	/**
-	 * Init context
-	 * @param ContextInterface context
-	 */
-	public static void onInitContext(ContextInterface context){}
 	
 	
 }

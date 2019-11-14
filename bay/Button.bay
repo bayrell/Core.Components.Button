@@ -1,5 +1,5 @@
 /*!
- *  Bayrell Core Library
+ *  Bayrell Runtime Library
  *
  *  (c) Copyright 2018-2019 "Ildar Bikmamatov" <support@bayrell.org>
  *
@@ -16,28 +16,25 @@
  *  limitations under the License.
  */
  
-namespace Core.Components.Button;
+namespace Runtime.Web.Button;
 
-use Core.Annotations.BindValue;
-use Core.Annotations.Event;
-use Core.Components.Button.ButtonModel;
-use Core.UI.Events.MouseEvent.MouseClickEvent;
-use Core.UI.Interfaces.ComponentInterface;
-use Core.UI.Component;
-use Core.UI.PocketModel;
+use Runtime.CoreStruct;
+use Runtime.Web.UI.Component;
+use Runtime.Web.UI.LayoutModel;
+use Runtime.Web.UI.Events.Mouse.MouseClickEvent;
 
 
 class Button extends Component
 {
 	
-	public ButtonModel model;
+	public CoreStruct model;
 	
 	
 	
 	/**
 	 * Returns model name
 	 */
-	lambda string modelName() => classof ButtonModel;
+	lambda string modelName() => classof CoreStruct;
 	
 	
 	
@@ -48,7 +45,6 @@ class Button extends Component
 		@css{
 			%button{
 				padding: 6px 12px;
-				cursor: pointer;
 			}
 		}
 	;
@@ -58,31 +54,33 @@ class Button extends Component
 	/**
 	 * Component render
 	 */
-	lambda Collection<UIStruct> render(ButtonModel model, UIStruct ui, PocketModel pocket) =>
-		<button
-			@class='button'
-			@tag={ ui.props.get("@tag", "") }
-			@annotations=[
-				new Event{
-					"event": classof MouseClickEvent, 
-					"method_name": "onButtonClick"
-				}
-			]
-		>{ ui.children }</button>
-	;
+	lambda html render
+	(
+		LayoutModel layout, CoreStruct model, Dict params, html content, var control
+	)
+	{
+		primitive tag = (params != null) ? params.get("@tag", "") : "";
+		return
+			<button @class='button' @tag={ tag } @event:MouseClickEvent="onClick">{ content }</button>
+		;
+	}
 	
 	
 	
+	#ifdef FRONTEND then
 	
 	/* ---------------------------------- Events ----------------------------------- */
 	
 	
 	/**
-	 * Button click
+	 * On click
 	 */
-	public void onButtonClick(UIEvent<MouseClickEvent> e)
+	public void onClick(MouseClickEvent e)
 	{
-		this.signalOut(e.event);
+		this.signalOut(e);
 	}
+	
+	
+	#endif
 	
 }
