@@ -21,20 +21,11 @@ namespace Runtime.Web.Button;
 use Runtime.CoreStruct;
 use Runtime.Web.Component;
 use Runtime.Web.LayoutModel;
-use Runtime.Web.Events.Mouse.MouseClickEvent;
+use Runtime.Web.Events.MouseClickEvent;
 
 
 class Button extends Component
 {
-	
-	public CoreStruct model;
-	
-	
-	
-	/**
-	 * Returns model name
-	 */
-	pure string modelName() => classof CoreStruct;
 	
 	
 	
@@ -75,7 +66,7 @@ class Button extends Component
 	 */
 	public void onClick(MouseClickEvent e)
 	{
-		this.signalOut(e);
+		this.signal(e);
 	}
 	
 	
